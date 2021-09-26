@@ -38,6 +38,7 @@ class _QuizScreenState extends State<QuizScreen> {
           ),
           Wrap(
             spacing: 40,
+            runSpacing: 20,
             children: _question.options!
                 .map(
                   (option) => TextButton(
