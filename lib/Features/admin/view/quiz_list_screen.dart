@@ -1,3 +1,4 @@
+import 'package:basic_app/Features/admin/controller/logics.dart';
 import 'package:basic_app/Features/admin/controller/state_management.dart';
 import 'package:basic_app/core/data/temp_data.dart';
 import 'package:basic_app/core/model/quiz_model.dart';
@@ -7,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'addQuiz_dialog.dart';
 
 class QuizListScreen extends StatelessWidget {
+  AdminLogics methods = AdminLogics();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,10 +41,7 @@ class QuizListScreen extends StatelessWidget {
     return Card(
       child: ListTile(
         trailing: IconButton(
-          onPressed: () {
-            quizList.remove(quiz);
-            StateManagement().updateStream(quiz);
-          },
+          onPressed: () => methods.deleteQuiz(quiz),
           icon: Icon(Icons.remove_circle),
         ),
         title: Text(

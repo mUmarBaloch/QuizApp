@@ -1,3 +1,4 @@
+import 'package:basic_app/Features/admin/controller/logics.dart';
 import 'package:basic_app/Features/admin/controller/state_management.dart';
 import 'package:basic_app/core/data/local_db.dart';
 import 'package:basic_app/core/data/temp_data.dart';
@@ -7,6 +8,7 @@ import 'package:basic_app/shared/styles.dart';
 import 'package:flutter/material.dart';
 
 class AddQuizDialog extends StatelessWidget {
+  final AdminLogics methods = AdminLogics();
   final _questionController = TextEditingController();
   final _correctOptionController = TextEditingController();
   final _secondOptionController = TextEditingController();
@@ -73,9 +75,7 @@ class AddQuizDialog extends StatelessWidget {
                 var _quiz = Quiz(
                     question: '${_questionController.text}',
                     options: _quizOption..shuffle());
-                quizList.add(_quiz);
-                LocalDb().setData(quizList);
-                StateManagement().updateStream(_quiz);
+                methods.addQuiz(_quiz);
                 Navigator.pop(context);
               },
               icon: Icon(Icons.add),
