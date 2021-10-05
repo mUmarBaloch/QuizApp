@@ -1,4 +1,5 @@
 import 'package:basic_app/Features/admin/controller/state_management.dart';
+import 'package:basic_app/core/data/local_db.dart';
 import 'package:basic_app/core/data/temp_data.dart';
 import 'package:basic_app/core/model/quiz_model.dart';
 import 'package:basic_app/core/model/quiz_option_model.dart';
@@ -73,7 +74,8 @@ class AddQuizDialog extends StatelessWidget {
                     question: '${_questionController.text}',
                     options: _quizOption..shuffle());
                 quizList.add(_quiz);
-                StateManagement().addDataToStream(_quiz);
+                LocalDb().setData(quizList);
+                StateManagement().updateStream(_quiz);
                 Navigator.pop(context);
               },
               icon: Icon(Icons.add),

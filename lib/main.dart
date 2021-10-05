@@ -1,8 +1,11 @@
+import 'package:basic_app/core/data/local_db.dart';
 import 'package:flutter/material.dart';
 
 import 'home_page.dart';
 
-void main() {
+void main() async {
+  await LocalDb().initPref();
+  await LocalDb().getData();
   runApp(MyApp());
 }
 

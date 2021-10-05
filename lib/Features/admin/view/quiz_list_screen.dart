@@ -28,37 +28,42 @@ class QuizListScreen extends StatelessWidget {
             return Container(
               decoration: containerDecoration(),
               child: ListView(
-                children: quizList
-                    .map((quiz) => Card(
-                          child: ListTile(
-                            title: Text(
-                              quiz.question.toString(),
-                              style: TextStyle(fontSize: 18),
-                            ),
-                            subtitle: Column(
-                              children: quiz.options!
-                                  .map((quizOption) => Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Text(quizOption.option.toString(),
-                                              style: TextStyle(
-                                                  color:
-                                                      Colors.deepPurpleAccent)),
-                                          SizedBox(width: 40),
-                                          Text(quizOption.score.toString(),
-                                              style: TextStyle(
-                                                  color: Colors.purpleAccent)),
-                                        ],
-                                      ))
-                                  .toList(),
-                            ),
-                          ),
-                        ))
-                    .toList(),
+                children: quizList.map((quiz) => quizCard(quiz)).toList(),
               ),
             );
           }),
+    );
+  }
+
+  Card quizCard(Quiz quiz) {
+    return Card(
+      child: ListTile(
+        trailing: IconButton(
+          onPressed: () {
+            quizList.remove(quiz);
+            StateManagement().updateStream(quiz);
+          },
+          icon: Icon(Icons.remove_circle),
+        ),
+        title: Text(
+          quiz.question.toString(),
+          style: TextStyle(fontSize: 18),
+        ),
+        subtitle: Column(
+          children: quiz.options!
+              .map((quizOption) => Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(quizOption.option.toString(),
+                          style: TextStyle(color: Colors.deepPurpleAccent)),
+                      SizedBox(width: 40),
+                      Text(quizOption.score.toString(),
+                          style: TextStyle(color: Colors.purpleAccent)),
+                    ],
+                  ))
+              .toList(),
+        ),
+      ),
     );
   }
 }
