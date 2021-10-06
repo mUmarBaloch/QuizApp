@@ -1,5 +1,8 @@
+import 'dart:ffi';
+
 import 'package:basic_app/Features/admin/controller/logics.dart';
 import 'package:basic_app/Features/admin/controller/state_management.dart';
+import 'package:basic_app/Features/admin/view/widgets.dart';
 import 'package:basic_app/core/data/local_db.dart';
 import 'package:basic_app/core/data/temp_data.dart';
 import 'package:basic_app/core/model/quiz_model.dart';
@@ -24,57 +27,31 @@ class AddQuizDialog extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TextField(
-              controller: _questionController,
-              decoration: inputDecoration(),
-            ),
+            inputField(_questionController, 'Question*'),
             SizedBox(
               height: 30,
             ),
-            TextField(
-              controller: _correctOptionController,
-              decoration:
-                  inputDecoration().copyWith(labelText: 'Correct Option*'),
-            ),
+            inputField(_correctOptionController, 'Correct Option*'),
             SizedBox(
               height: 10,
             ),
-            TextField(
-              controller: _secondOptionController,
-              decoration: inputDecoration().copyWith(labelText: '2nd Option*'),
-            ),
+            inputField(_secondOptionController, '2nd Option*'),
             SizedBox(
               height: 10,
             ),
-            TextField(
-              controller: _thirdOptionController,
-              decoration: inputDecoration().copyWith(labelText: '3rd Option*'),
-            ),
+            inputField(_thirdOptionController, '3rd Option*'),
             SizedBox(
               height: 10,
             ),
-            TextField(
-              controller: _forthOptionController,
-              decoration: inputDecoration().copyWith(labelText: '4th Option*'),
-            ),
+            inputField(_forthOptionController, '4rth Option*'),
             SizedBox(
               height: 20,
             ),
             IconButton(
               onPressed: () {
-                var _quizOption = [
-                  QuizOption(
-                      option: '${_correctOptionController.text}', score: 5),
-                  QuizOption(
-                      option: '${_secondOptionController.text}', score: 0),
-                  QuizOption(
-                      option: '${_thirdOptionController.text}', score: 0),
-                  QuizOption(
-                      option: '${_forthOptionController.text}', score: 0),
-                ];
-                var _quiz = Quiz(
-                    question: '${_questionController.text}',
-                    options: _quizOption..shuffle());
+                var _quizOption, _quiz;
+                _quizOption = addOptions();
+                _quiz = addQuiz(_quizOption);
                 methods.addQuiz(_quiz);
                 Navigator.pop(context);
               },
@@ -86,4 +63,14 @@ class AddQuizDialog extends StatelessWidget {
       ),
     );
   }
+
+  List<QuizOption> addOptions() => [
+        QuizOption(option: '${_correctOptionController.text}', score: 5),
+        QuizOption(option: '${_secondOptionController.text}', score: 0),
+        QuizOption(option: '${_thirdOptionController.text}', score: 0),
+        QuizOption(option: '${_forthOptionController.text}', score: 0),
+      ];
+
+  Quiz addQuiz(_quizOption) => Quiz(
+      question: '${_questionController.text}', options: _quizOption..shuffle());
 }
