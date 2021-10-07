@@ -39,23 +39,22 @@ class _QuizScreenState extends State<QuizScreen> {
           Wrap(
             spacing: 40,
             runSpacing: 20,
-            children: _question.options!
+            children: _question.options
                 .map(
                   (option) => TextButton(
                       style: simpleButton(),
                       onPressed: () => setState(() {
-                            bool isCorrect = option.score == 5 ? true : false;
-                            if (isCorrect == true) {
+                            if (option.score == 5) {
                               score += 5;
                             }
-                            _questions.removeLast();
-                            if (_questions.length == 0) {
+
+                            if (_questions.length > 1) {
+                              _questions.removeLast();
+                            } else {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => Result()));
-                            } else {
-                              _question = _questions.last;
                             }
                           }),
                       child: Text(option.option.toString())),

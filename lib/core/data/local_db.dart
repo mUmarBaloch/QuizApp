@@ -15,13 +15,11 @@ class LocalDb {
   Future setData(List<Quiz> quizList) async {
     var encoded = quizList.map((e) => jsonEncode(e.toMap())).toList();
     await preferences?.setStringList('quizList', encoded);
-
-    //   var a = preferences?.getStringList('quizList');
-    //   print(a);
   }
 
   Future<List<Quiz>> getData() async {
-    var getFromPref = await preferences?.getStringList('quizList');
+    var getFromPref = preferences?.getStringList('quizList');
+    await Future.delayed(Duration(seconds: 2));
     var decoded = getFromPref?.map((e) => Quiz.fromMap(jsonDecode(e))).toList();
     return quizList = decoded ?? quizList;
   }

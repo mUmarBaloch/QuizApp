@@ -49,7 +49,7 @@ class QuizListScreen extends StatelessWidget {
           style: TextStyle(fontSize: 18),
         ),
         subtitle: Column(
-          children: quiz.options!
+          children: quiz.options
               .map((quizOption) => Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [

@@ -2,7 +2,7 @@ import 'quiz_option_model.dart';
 
 class Quiz {
   String? question;
-  List<QuizOption>? options;
+  List<QuizOption> options;
 
   Quiz({required this.question, required this.options});
 
@@ -14,6 +14,6 @@ class Quiz {
 
   Map<dynamic, dynamic> toMap() => {
         'question': question,
-        'options': options?.map((e) => e.toMap()).toList(),
+        'options': options.map((e) => e.toMap()).toList(),
       };
 }
