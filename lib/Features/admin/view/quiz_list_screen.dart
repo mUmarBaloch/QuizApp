@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'addQuiz_dialog.dart';
 
 class QuizListScreen extends StatelessWidget {
-  AdminLogics methods = AdminLogics();
+  final AdminLogics methods = AdminLogics();
   @override
   Widget build(BuildContext context) {
     return Scaffold(

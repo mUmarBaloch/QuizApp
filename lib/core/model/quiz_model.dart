@@ -1,5 +1,3 @@
-import 'package:flutter/foundation.dart';
-
 import 'quiz_option_model.dart';
 
 class Quiz {
