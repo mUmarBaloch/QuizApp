@@ -11,30 +11,35 @@ class QuizListScreen extends StatelessWidget {
   final AdminLogics methods = AdminLogics();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Admin'),
-        actions: [
-          IconButton(
-              onPressed: () {
-                showDialog(
-                    context: context, builder: (context) => AddQuizDialog());
-              },
-              icon: Icon(Icons.add))
-        ],
-      ),
-      body: StreamBuilder<Quiz>(
-          stream: StateManagement.quizStream.stream,
-          builder: (context, snapshot) {
-            print('updated stream');
-            return Container(
+    return StreamBuilder<Quiz>(
+        stream: StateManagement.quizStream.stream,
+        builder: (context, snapshot) {
+          print('updated stream');
+          return Scaffold(
+            appBar: AppBar(
+              title: Text('Admin  ,   total : ${quizList.length}'),
+              actions: [
+                IconButton(
+                    color: Colors.white,
+                    onPressed: () {
+                      showDialog(
+                          context: context,
+                          builder: (context) => AddQuizDialog());
+                    },
+                    icon: Icon(
+                      Icons.add,
+                      color: Colors.white,
+                    ))
+              ],
+            ),
+            body: Container(
               decoration: containerDecoration(),
               child: ListView(
                 children: quizList.map((quiz) => quizCard(quiz)).toList(),
               ),
-            );
-          }),
-    );
+            ),
+          );
+        });
   }
 
   Card quizCard(Quiz quiz) {
