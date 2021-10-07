@@ -1,3 +1,4 @@
+import 'package:basic_app/Features/basics/views/high_score_screen.dart';
 import 'package:basic_app/core/data/local_db.dart';
 import 'package:flutter/material.dart';
 

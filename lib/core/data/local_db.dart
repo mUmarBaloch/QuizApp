@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:basic_app/core/data/temp_data.dart';
 import 'package:basic_app/core/model/quiz_model.dart';
+import 'package:flutter/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalDb {
@@ -17,10 +18,14 @@ class LocalDb {
     await preferences?.setStringList('quizList', encoded);
   }
 
-  Future<List<Quiz>> getData() async {
-    var getFromPref = preferences?.getStringList('quizList');
+  setHighScore() async => await preferences?.setInt('highScore', highScore);
+  Future getData() async {
+    var getQuizFromPref = preferences?.getStringList('quizList');
+    var getHighScore = preferences?.getInt('highScore');
     await Future.delayed(Duration(seconds: 2));
-    var decoded = getFromPref?.map((e) => Quiz.fromMap(jsonDecode(e))).toList();
-    return quizList = decoded ?? quizList;
+    var decoded =
+        getQuizFromPref?.map((e) => Quiz.fromMap(jsonDecode(e))).toList();
+    quizList = decoded ?? quizList;
+    highScore = getHighScore ?? highScore;
   }
 }

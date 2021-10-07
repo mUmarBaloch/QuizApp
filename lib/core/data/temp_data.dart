@@ -2,7 +2,7 @@ import '../model/quiz_model.dart';
 import '../model/quiz_option_model.dart';
 
 int score = 0;
-
+int highScore = 0;
 List<Quiz> quizList = [
   Quiz(question: 'Lenovo is a Tech company', options: [
     QuizOption(option: 'Yes!', score: 5),

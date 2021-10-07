@@ -1,3 +1,4 @@
+import 'package:basic_app/Features/quiz/controller/logics.dart';
 import 'package:basic_app/core/data/temp_data.dart';
 import 'package:basic_app/home_page.dart';
 import 'package:basic_app/shared/styles.dart';
@@ -8,6 +9,7 @@ class Result extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    highScoreLogic();
     return Scaffold(
       body: Container(
         height: double.infinity,
@@ -38,7 +40,7 @@ class Result extends StatelessWidget {
                 height: 20,
               ),
               Text(
-                "Highest Score : ('under development')",
+                "Highest Score : $highScore",
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 18,
