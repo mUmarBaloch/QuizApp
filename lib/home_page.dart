@@ -29,6 +29,9 @@ class HomePage extends StatelessWidget {
                 style: ButtonStyle(
                     foregroundColor: MaterialStateProperty.all(Colors.white54)),
               ),
+              SizedBox(
+                height: 10,
+              ),
             ],
           ),
         ),
